@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-q$c)9gx$8lv)6zg8cpb00s9jyg-klz^=dk33%m1u56%=r8z26c
 DEBUG = os.getenv('DEBUG') == 'True'
 
 # ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = ['www.samfanapp.com.tw', 'samfanapp.com.tw', '139.162.75.152', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['www.samfanapp.com', 'samfanapp.com', '139.162.75.152', '127.0.0.1', 'localhost']
 
 CORS_ALLOW_ALL_ORIGINS = True
 
