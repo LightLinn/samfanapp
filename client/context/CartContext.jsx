@@ -54,8 +54,7 @@ export const CartProvider = ({ children }) => {
 
   const clearAllCart = async () => {
     try {
-      const { count } = await clearCart();
-      setCartItemCount(count);
+      setCartItemCount(0);
     } catch (error) {
       console.error('Error clearing cart:', error);
     }

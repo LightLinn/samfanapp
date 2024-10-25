@@ -4,6 +4,7 @@ import { useRouter } from 'expo-router';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { COLORS, FONT, SIZES, SHADOWS } from '../../styles/theme';
 import { convertCartToOrder } from '../../api/convertApi';
+import { useCart } from '../../context/CartContext';
 
 // 日期格式化函數
 const formatDate = (date) => {
@@ -20,6 +21,7 @@ const CartInfoScreen = () => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const { clearAllCart } = useCart();
 
   const router = useRouter();
 
@@ -69,7 +71,7 @@ const CartInfoScreen = () => {
           pickupDate: formatDate(pickupDate)
         };
         const response = await convertCartToOrder(data);
-        console.log('Order created:', response);
+        await clearAllCart()
         Alert.alert('成功', '訂單已成功創建', [
           { 
             text: '確定', 

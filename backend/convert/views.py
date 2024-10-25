@@ -7,6 +7,8 @@ from sales_periods.models import SalesPeriod
 from carts.models import Cart, CartItem
 from orders.serializers import OrderSerializer
 import logging
+from django.utils import timezone
+
 
 logger = logging.getLogger(__name__)
 
@@ -34,12 +36,11 @@ class ConvertCartToOrderView(APIView):
             return Response({"錯誤": "購物車是空的"}, status=status.HTTP_400_BAD_REQUEST)
 
         # 獲取當前銷售檔期
-        try:
-            sales_period = SalesPeriod.objects.get(status='開放訂購')
-            print(sales_period)
-
-        except SalesPeriod.DoesNotExist:
-            return Response({'detail': '當前沒有開放訂購的銷售檔期。'}, status=status.HTTP_400_BAD_REQUEST)
+        current_date = timezone.now().date()
+        sales_period = SalesPeriod.objects.filter(
+            start_date__lte=current_date,
+            end_date__gte=current_date
+        ).first()
         
 
         order = Order.objects.create(
@@ -69,5 +70,7 @@ class ConvertCartToOrderView(APIView):
 
         cart_items.delete()
 
+        # 更新購物車item的數量
+
         order_serializer = OrderSerializer(order)
-        return Response(order_serializer.data, status=status.HTTP_201_CREATED)
+        return Response({'data': order_serializer.data, 'count': 0}, status=status.HTTP_201_CREATED)

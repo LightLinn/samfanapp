@@ -5,7 +5,7 @@
     "scheme": "client",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -16,6 +16,7 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.lightlin001.SamFanApp",
       "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
         "UIBackgroundModes": [
           "fetch",
           "remote-notification"
@@ -39,6 +40,11 @@
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "77cc45b0-690e-4a51-a556-ae26969b6af2"
+      }
+    }
   }
 }
