@@ -31,5 +31,5 @@ class SalesPeriod(models.Model):
             raise ValidationError('此檔期的日期區間與其他檔期重疊。')
 
     def save(self, *args, **kwargs):
-        self.clean()
+        self.clean() 
         super().save(*args, **kwargs)

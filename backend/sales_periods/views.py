@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 
 class SalesPeriodViewSet(viewsets.ModelViewSet):
-    queryset = SalesPeriod.objects.all()
+    queryset = SalesPeriod.objects.all().order_by('start_date')
     serializer_class = SalesPeriodSerializer
     # permission_classes = [IsAuthenticated]
 

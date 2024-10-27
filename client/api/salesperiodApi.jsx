@@ -28,8 +28,10 @@ export const createSalesPeriod = async (salesPeriodData) => {
     const response = await api.post('/sales-periods/', salesPeriodData);
     return response.data;
   } catch (error) {
-    console.error('Error creating sales period:', error);
-    throw error;
+    if (error.response?.data?.error) {
+      throw new Error(error.response.data.error);
+    }
+    throw new Error(error.response.data.error);
   }
 };
 

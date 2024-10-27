@@ -84,6 +84,9 @@ class OrderViewSet(viewsets.ModelViewSet):
         order = self.get_object()
         item_id = request.data.get('item_id')
         item_data = request.data.get('item_data')
+        # 若item_data中is_prepared為False，則price設為0
+        if not item_data.get('is_prepared'):
+            item_data['price'] = 0
         
         if not item_id or not item_data:
             return Response({"detail": "未提供項目 ID 或數據"}, status=status.HTTP_400_BAD_REQUEST)

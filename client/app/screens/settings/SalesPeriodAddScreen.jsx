@@ -46,12 +46,23 @@ const SalesPeriodAddScreen = () => {
     }
 
     try {
-      await createSalesPeriod({ name, start_date: startDate, end_date: endDate, status });
-      Alert.alert('成功', '檔期已新增');
-      router.back();
+      await createSalesPeriod({ 
+        name, 
+        start_date: startDate, 
+        end_date: endDate 
+      });
+      Alert.alert('成功', '檔期已新增', [
+        {
+          text: '確定',
+          onPress: () => router.back()
+        }
+      ]);
     } catch (error) {
-      console.error('Error creating sales period:', error);
-      Alert.alert('錯誤', '無法新增檔期，請稍後再試');
+      Alert.alert(
+        '錯誤',
+        error.message || '檔期日期重疊，或其他錯誤，請重新確認',
+        [{ text: '確定' }]
+      );
     }
   };
 
